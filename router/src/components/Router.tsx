@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 
-type RoutesProps = {
+type RouterProps = {
   children: React.ReactNode;
 };
 
-const Routes = ({ children }: RoutesProps) => {
+const Router = ({ children }: RouterProps) => {
   const [pathname, setPathname] = useState(location.pathname);
+
+  const clonedChildren = React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) return React.cloneElement(child, { pathname } as { pathname: string });
+
+    return child;
+  });
 
   useEffect(() => {
     const onPopstate = () => setPathname(location.pathname);
@@ -16,13 +22,8 @@ const Routes = ({ children }: RoutesProps) => {
       window.removeEventListener("popstate", onPopstate);
     };
   }, []);
-  const clonedChildren = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) return React.cloneElement(child, { pathname } as { pathname: string });
-
-    return child;
-  });
 
   return clonedChildren;
 };
 
-export default Routes;
+export default Router;

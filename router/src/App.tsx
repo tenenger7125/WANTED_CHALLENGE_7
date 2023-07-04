@@ -1,14 +1,14 @@
-import Routes from "./components/Routes";
+import Router from "./components/Router";
 import Route from "./components/Route";
 import Root from "./pages/Root";
 import About from "./pages/About";
 
 function App() {
   return (
-    <Routes>
+    <Router>
       <Route path="/" component={<Root />} />
       <Route path="/about" component={<About />} />
-    </Routes>
+    </Router>
   );
 }
 
