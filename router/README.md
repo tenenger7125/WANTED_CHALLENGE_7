@@ -1,11 +1,23 @@
 - [과제](#과제)
   - [React와 History API 사용하여 SPA Router 기능 구현하기](#react와-history-api-사용하여-spa-router-기능-구현하기)
-  - [접근 방법](#접근-방법)
-  - [접근 방법](#접근-방법-1)
-  - [접근 방법](#접근-방법-2)
-  - [접근 방법](#접근-방법-3)
-  - [접근 방법](#접근-방법-4)
-  - [접근 방법](#접근-방법-5)
+  - [1. 요구사항](#1-요구사항)
+    - [해당 주소로 진입했을 때 아래 주소에 맞는 페이지가 렌더링 되어야 한다.](#해당-주소로-진입했을-때-아래-주소에-맞는-페이지가-렌더링-되어야-한다)
+    - [접근 방법](#접근-방법)
+  - [2. 요구사항](#2-요구사항)
+    - [버튼을 클릭하면 해당 페이지로, 뒤로 가기 버튼을 눌렀을 때 이전 페이지로 이동해야 한다.](#버튼을-클릭하면-해당-페이지로-뒤로-가기-버튼을-눌렀을-때-이전-페이지로-이동해야-한다)
+    - [접근 방법](#접근-방법-1)
+  - [3. 요구사항](#3-요구사항)
+    - [Router, Route 컴포넌트를 구현해야 하며, 형태는 아래와 같아야 한다.](#router-route-컴포넌트를-구현해야-하며-형태는-아래와-같아야-한다)
+    - [접근 방법](#접근-방법-2)
+  - [4. 요구사항](#4-요구사항)
+    - [최소한의 push 기능을 가진 useRouter Hook을 작성한다.](#최소한의-push-기능을-가진-userouter-hook을-작성한다)
+    - [접근 방법](#접근-방법-3)
+  - [5. 요구사항](#5-요구사항)
+    - [아래 스크린샷을 참고하여 앱을 작성한다.](#아래-스크린샷을-참고하여-앱을-작성한다)
+    - [접근 방법](#접근-방법-4)
+  - [6. 요구사항](#6-요구사항)
+    - [참고) **Vite 초기 세팅 (링크)**](#참고-vite-초기-세팅-링크)
+    - [접근 방법](#접근-방법-5)
 
 ## 과제
 
@@ -15,14 +27,14 @@
 
 <br/>
 
-> ### 1. 요구사항
->
-> #### 해당 주소로 진입했을 때 아래 주소에 맞는 페이지가 렌더링 되어야 한다.
->
+### 1. 요구사항
+
+#### 해당 주소로 진입했을 때 아래 주소에 맞는 페이지가 렌더링 되어야 한다.
+
 > - `/` → `root` 페이지
 > - `/about` → `about` 페이지
 
-### 접근 방법
+#### 접근 방법
 
 - 페이지 관련 컴포넌트는 pages 폴더안에 `Root`, `About` 컴포넌트로 구성했다.
 
@@ -39,13 +51,13 @@
 
 <br/>
 
-> ### 2. 요구사항
->
-> #### 버튼을 클릭하면 해당 페이지로, 뒤로 가기 버튼을 눌렀을 때 이전 페이지로 이동해야 한다.
->
+### 2. 요구사항
+
+#### 버튼을 클릭하면 해당 페이지로, 뒤로 가기 버튼을 눌렀을 때 이전 페이지로 이동해야 한다.
+
 > - 힌트) `window.onpopstate`, `window.location.pathname` History API(`pushState`)
 
-### 접근 방법
+#### 접근 방법
 
 - history API 중에서 history.push와 history.pushState 메서드가 존재한다.
   - history.push는 react에서 제공해주는 API이다.
@@ -67,10 +79,10 @@
 
 <br/>
 
-> ### 3. 요구사항
->
-> #### Router, Route 컴포넌트를 구현해야 하며, 형태는 아래와 같아야 한다.
->
+### 3. 요구사항
+
+#### Router, Route 컴포넌트를 구현해야 하며, 형태는 아래와 같아야 한다.
+
 > ```tsx
 > ReactDOM.createRoot(container).render(
 >   <Router>
@@ -80,7 +92,7 @@
 > );
 > ```
 
-### 접근 방법
+#### 접근 방법
 
 - 공용으로 사용되는 컴포넌트는 components 폴더 안에 Router, Route 컴포넌트를 구현했다.
   ```
@@ -179,15 +191,15 @@
 
 <br/>
 
-> ### 4. 요구사항
->
-> #### 최소한의 push 기능을 가진 useRouter Hook을 작성한다.
->
+### 4. 요구사항
+
+#### 최소한의 push 기능을 가진 useRouter Hook을 작성한다.
+
 > ```tsx
 > const { push } = useRouter();
 > ```
 
-### 접근 방법
+#### 접근 방법
 
 - hooks 폴더안에 `useRouter.tsx` 파일을 생성했다.
   ```
@@ -212,14 +224,18 @@
   export default useRouter;
   ```
 
-> ### 5. 요구사항
->
-> #### 아래 스크린샷을 참고하여 앱을 작성한다.
->
+---
+
+<br/>
+
+### 5. 요구사항
+
+#### 아래 스크린샷을 참고하여 앱을 작성한다.
+
 > - **TO-BE) About 경로** > <img src="https://lean-mahogany-686.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fd2a19c69-ed92-4431-afca-156a3d8ccd7e%2FUntitled.png?id=5526a31c-b3c7-4fb8-9b66-cf510264e1ac&table=block&spaceId=7ac0bf59-e3bb-4f76-a93b-27f040ec55b6&width=2000&userId=&cache=v2">
 > - **TO-BE) Root 경로** > <img src="https://lean-mahogany-686.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fa10c03a3-1d27-4a02-a495-c7f98775ca23%2FUntitled.png?id=c3f5bcfe-e485-467f-8cd8-b97168c25c1d&table=block&spaceId=7ac0bf59-e3bb-4f76-a93b-27f040ec55b6&width=2000&userId=&cache=v2">
 
-### 접근 방법
+#### 접근 방법
 
 - 기능 구현이 주 목적이었기 때문에 기본적인 기능만 구현하고, 별도의 CSS 작업은 하지 않았다.
 
@@ -227,10 +243,10 @@
 
 <br/>
 
-> ### 6. 요구사항
->
-> #### 참고) **Vite 초기 세팅 ([링크](https://vitejs-kr.github.io/guide/#scaffolding-your-first-vite-project))**
->
+### 6. 요구사항
+
+#### 참고) **Vite 초기 세팅 ([링크](https://vitejs-kr.github.io/guide/#scaffolding-your-first-vite-project))**
+
 > ```bash
 > $> yarn create vite
 > # 실행 후 cli의 지시에 따라 react, react-ts 중 택일하여 초기 세팅할 것
@@ -243,7 +259,7 @@
 >   - CRA에 비해 프로젝트에 담긴 의존성 규모가 작아서 인스톨 시간에 대한 부담이 없음
 >   - **HMR 및 빌드 속도가 매우 빠름**
 
-### 접근 방법
+#### 접근 방법
 
 - typescript를 공부할 겸, react-ts template으로 생성했다.
 
