@@ -5,7 +5,7 @@ type RouteProps = {
 };
 
 const Route = ({ path, component, pathname }: RouteProps) => {
-  if (pathname === path) return component;
+  return pathname === path ? component : null;
 };
 
 export default Route;
