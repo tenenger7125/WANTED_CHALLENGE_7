@@ -60,9 +60,7 @@
 #### 접근 방법
 
 - history API 중에서 history.push와 history.pushState 메서드가 존재한다.
-  - history.push는 react에서 제공해주는 API이다.
   - history.pushState는 window에서 제공해주는 API이다.
-  - react 환경에 국한되지 않고 호환되는 브라우저 환경이라면 동작가능하도록, 브라우저에서 제공해주는 `history.pushState 메서드를 활용`하기로 했다.
 - history.pushState 메서드는 popstate 이벤트가 trigger 된다.
   - 이벤트를 감지하기 위한 onpopstate 프로퍼티 이벤트 리스너와 addEvnetListener의 popstate 이벤트 리스너 2가지 방법이 있다.
   - addEventListener는 이벤트를 2개 이상 중복해서 바인딩할 수 있어서 `addEventListener를 선정`했다.
@@ -107,9 +105,9 @@
   ┣ 📜App.tsx
   ┗ 📜main.tsx
   ```
-- Router 컴포넌트에서는 history.pushState 메서드 호출 및 popstate 이벤트를 dispatch하여 popstate 이벤트 핸들러를 실행시킨다.
+- Router 컴포넌트에서는 popstate 이벤트를 catch하여 popstate 이벤트 핸들러를 실행시킨다.
 
-  - 이벤트를 실행시키더라도 리렌더링이 발생하지 않아 고정된 페이지를 보여준다.
+  - 이벤트 핸들러를 실행시키더라도 리렌더링이 발생하지 않아 고정된 페이지를 보여준다.
   - ⭐ 리렌더링을 발생시키기위해 pathname를 state로 관리한다.
   - pathname은 url이 변경될때(pushState 메서드 호출 및 이벤트 dispatch) setState를 통해 pathname을 변경하고 리렌더링을 발생시킨다.
   - pathname을 props로 전달받는 자식들은 리렌더링을 하여 컴포넌트를 호출한다.
