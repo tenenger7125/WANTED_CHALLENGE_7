@@ -46,6 +46,8 @@
 
 - 해당 로직으로 리액트에서 리렌더링 발생시키는 방법을 알지 못해 아쉽다.
 
+---
+
 <br/>
 
 ### 1. 요구사항
@@ -80,15 +82,17 @@
 
 > - 너무 어렵게 생각하지 마세요. 제가 작성한 scratch는 20줄이 안됩니다.
 > - 힌트
->   1. createStore는 reducer를 인자로 받아 store를 리턴하는 함수다
->      ```js
->      const store = createStore((state, action) => {
->        if (action.type === "ADD") {
->          return { ...state, todos: [...state.todos, action.payload] };
->        }
->        return state;
->      });
->      ```
+>
+> 1. createStore는 reducer를 인자로 받아 store를 리턴하는 함수다
+>
+>    ```js
+>    const store = createStore((state, action) => {
+>      if (action.type === "ADD") {
+>        return { ...state, todos: [...state.todos, action.payload] };
+>      }
+>      return state;
+>    });
+>    ```
 >
 > 2. `store`는 `subscribe()`, `dispatch()`, `getState()`를 메서드로 가진 객체다
 > 3. `reducer`는 createStore의 내부 상태인 state와, action 객체를 인자로 받아 action type에 따라 로직을 처리한 후 새로운 state를 리턴하는 함수다
