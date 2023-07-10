@@ -1,6 +1,8 @@
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
+import { Plugin } from "unified";
+import { Root } from "mdast";
 
 const defaultMetaData = {
   imgURL: "https://via.placeholder.com/320x150",
@@ -9,7 +11,9 @@ const defaultMetaData = {
 const markdown = {
   async parse(content: string) {
     const { content: markdown, data: metaData } = matter(content);
-    const { value } = await remark().use(html).process(markdown); // ❗ 타입 에러
+    const { value } = await remark()
+      .use(html as Plugin<[], Root, string>)
+      .process(markdown);
 
     return {
       metaData: { ...defaultMetaData, ...metaData },
