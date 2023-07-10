@@ -46,7 +46,7 @@ const defaultMeta = {
   slug: "markdown, html",
   date: "2023-07-10",
   imgURL: "https://via.placeholder.com/320x150",
-  deployURL: "",
+  deployURL: "https://wanted-challenge-blog.vercel.app/",
 };
 
 export default Meta;
