@@ -20,7 +20,7 @@ export type PostProps = {
 
 const Post = ({ metaData: { title, description, date, categories, tags, slug, imgURL }, markup }: PostProps) => {
   return (
-    <SLayout>
+    <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
@@ -41,10 +41,11 @@ const Post = ({ metaData: { title, description, date, categories, tags, slug, im
         <meta property="twitter:description" content={description} />
         <meta property="twitter:image" content={imgURL} />
         <meta property="twitter:url" content="배포URL" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main dangerouslySetInnerHTML={markup} />
-    </SLayout>
+      <SLayout>
+        <main dangerouslySetInnerHTML={markup} />
+      </SLayout>
+    </>
   );
 };
 
