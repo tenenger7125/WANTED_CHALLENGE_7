@@ -2,20 +2,29 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
 
-export const mark = {
-  async read(data: string[] | string) {
-    const contents = Array.isArray(data) ? data : [data];
-    const promises = contents.map(async (content) => {
-      const { content: markdown, data: metaData } = matter(content);
-      const { value } = await remark().use(html).process(markdown);
+const defaultMetaData = {
+  imgURL: "https://via.placeholder.com/320x150",
+};
 
-      return {
-        metaData: { ...metaData, imgURL: metaData.imgURL || "https://via.placeholder.com/320x150" },
-        markup: { __html: String(value) },
-      };
-    });
+const markdown = {
+  async parse(content: string) {
+    const { content: markdown, data: metaData } = matter(content);
+    const { value } = await remark().use(html).process(markdown);
 
-    const posts = await Promise.all(promises);
-    return posts;
+    return {
+      metaData: { ...defaultMetaData, ...metaData },
+      markup: { __html: String(value) },
+    };
+  },
+  async parser(contents: string[]) {
+    if (Array.isArray(contents)) {
+      const promises = contents.map(this.parse);
+      const posts = await Promise.all(promises);
+      return posts;
+    }
+
+    return await this.parse(contents);
   },
 };
+
+export default markdown;

@@ -1,32 +1,18 @@
-import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { styled } from "styled-components";
 import type { GetStaticProps } from "next";
 
-import { mark } from "@/utils/mark";
-import { files } from "@/utils/files";
+import { Title, Text, Meta, Badge } from "@/components";
+import { mark, files } from "@/utils";
 import { PATH } from "@/constants/path";
-import Title from "@/components/Title";
-import Text from "@/components/Text";
-import { SSrOnly, SBadge } from "@/styles/common";
+import { SSrOnly } from "@/styles/common";
 import type { PostProps } from "./posts/[postId]";
-import { Reset } from "styled-reset";
-
-type HomeProps = {
-  posts: PostProps[];
-};
 
 const Home = ({ posts }: HomeProps) => {
   return (
     <>
-      {/* <Reset /> */}
-      <Head>
-        <title>마크다운 블로그</title>
-        <meta name="description" content="마크다운 파일을 HTML로 변환하고 JSX로 반환하여 화면에 렌더링합니다." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Meta />
       <SLayout>
         {posts.map(({ metaData: { categories, date, description, slug, tags, title, imgURL } }, idx) => (
           <SArticle key={idx}>
@@ -47,7 +33,7 @@ const Home = ({ posts }: HomeProps) => {
                 </SCategories>
                 <div>
                   {tags.map((tag) => (
-                    <SBadge key={tag}>{tag}</SBadge>
+                    <Badge key={tag}>{tag}</Badge>
                   ))}
                 </div>
               </SInfoContainer>
@@ -61,8 +47,8 @@ const Home = ({ posts }: HomeProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const contents = files.get();
-  const posts = await mark.read(contents);
+  const contents = files.get() as string[]; // ❗ 타입 단언 쓰기 싫다.
+  const posts = await mark.parser(contents);
 
   return {
     props: {
@@ -101,5 +87,9 @@ const SCategories = styled.div`
   gap: 5px;
   font-weight: 700;
 `;
+
+type HomeProps = {
+  posts: PostProps[];
+};
 
 export default Home;

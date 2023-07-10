@@ -1,50 +1,14 @@
-import Head from "next/head";
-import type { GetStaticPaths, GetStaticProps } from "next";
 import { styled } from "styled-components";
-import { files } from "@/utils/files";
-import { mark } from "@/utils/mark";
+import type { GetStaticPaths, GetStaticProps } from "next";
 
-export type PostProps = {
-  metaData: {
-    title: string;
-    description: string;
-    date: string;
-    slug: string;
-    imgURL: string;
-    categories: string[];
-    tags: string[];
-    // [index: string]: string | string[] | undefined;
-  };
-  markup: { __html: string };
-};
+import { Meta } from "@/components";
+import { files, mark } from "@/utils";
 
-const Post = ({ metaData: { title, description, date, categories, tags, slug, imgURL }, markup }: PostProps) => {
+const Post = ({ metaData, markup }: PostProps) => {
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta name="Date" content={date} />
-        <meta name="keyword" content={slug} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="donggyu" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={imgURL} />
-        <meta property="og:url" content="배포URL" />
-
-        <meta property="twitter:card" content="summary" />
-        <meta property="twitter:site" content="donggyu" />
-        <meta property="twitter:title" content={title} />
-        <meta property="twitter:description" content={description} />
-        <meta property="twitter:image" content={imgURL} />
-        <meta property="twitter:url" content="배포URL" />
-      </Head>
-      <SLayout>
-        <main dangerouslySetInnerHTML={markup} />
-      </SLayout>
+      <Meta meta={metaData} />
+      <SLayout dangerouslySetInnerHTML={markup} />
     </>
   );
 };
@@ -67,10 +31,10 @@ export const getStaticPaths: GetStaticPaths = () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
 
-  if (!params) return { props: {} };
+  if (!params || typeof params.postId !== "string") return { props: {} }; // ❗ 좀...
 
-  const content = files.get();
-  const { metaData, markup } = (await mark.read(content))[0];
+  const content = files.get(+params.postId) as string; // ❗ 하아.... 타입 단언 쓰기 싫다..
+  const { metaData, markup } = await mark.parse(content);
 
   return {
     props: {
@@ -80,9 +44,22 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-const SLayout = styled.div`
+const SLayout = styled.main`
   width: 768px;
   margin: 0 auto;
 `;
+
+export type PostProps = {
+  metaData: {
+    title: string;
+    description: string;
+    date: string;
+    slug: string;
+    imgURL: string;
+    categories: string[];
+    tags: string[];
+  };
+  markup: { __html: string };
+};
 
 export default Post;
