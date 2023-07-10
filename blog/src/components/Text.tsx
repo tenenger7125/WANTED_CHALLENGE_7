@@ -3,16 +3,19 @@ import { styled } from "styled-components";
 type TextProps = {
   as?: "li" | "a" | "div" | "span";
   fz?: number;
+  $fz?: number;
   h?: "auto" | number;
+  $h?: "auto" | number;
   line?: number;
+  $line?: number;
   children: React.ReactNode;
 };
 
 const SText = styled.div<TextProps>`
-  font-size: ${(props) => props.fz}px;
-  height: ${(props) => props.h}px;
+  font-size: ${(props) => props.$fz}px;
+  height: ${(props) => props.$h}px;
   ${(props) =>
-    props.line &&
+    props.$line &&
     `
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -22,8 +25,12 @@ const SText = styled.div<TextProps>`
     `}
 `;
 
-const Text = ({ children, ...rest }: TextProps) => {
-  return <SText {...rest}>{children}</SText>;
+const Text = ({ children, h, fz, line, ...rest }: TextProps) => {
+  return (
+    <SText $h={h} $fz={fz} $line={line} {...rest}>
+      {children}
+    </SText>
+  );
 };
 
 Text.defaultProps = {

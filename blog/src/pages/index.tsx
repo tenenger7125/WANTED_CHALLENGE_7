@@ -39,7 +39,7 @@ const Home = ({ posts }: HomeProps) => {
         {posts.map(({ metaData: { categories, date, description, slug, tags, title, imgURL } }, idx) => (
           <SArticle key={idx}>
             <Link href={`${PATH.POSTS}/${idx}`}>
-              <Image src={imgURL} width={320} height={150} alt="thumbnail" />
+              <Image src={imgURL} alt="thumbnail" width={320} height={150} priority={true} />
               <SInfoContainer>
                 <Title line={1}>{title}</Title>
                 <Text line={4} h={63} fz={14}>

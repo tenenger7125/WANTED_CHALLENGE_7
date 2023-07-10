@@ -4,6 +4,7 @@ type TitleProps = {
   order: 1 | 2 | 3 | 4 | 5 | 6;
   children: React.ReactNode | string;
   line?: number;
+  $line?: number;
 };
 
 const STitle = styled.div<Partial<TitleProps>>`
@@ -24,7 +25,7 @@ const STitle = styled.div<Partial<TitleProps>>`
 const Title = ({ order, line, children }: TitleProps) => {
   const TitleOrder: keyof JSX.IntrinsicElements = `h${order}`;
   return (
-    <STitle as={TitleOrder} line={line}>
+    <STitle as={TitleOrder} $line={line}>
       {children}
     </STitle>
   );
