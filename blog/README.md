@@ -21,7 +21,7 @@
 
 ### Next.js로 마크다운 블로그 만들기
 
-- [DEMO](https://wanted-challenge-blog.vercel.app/)
+- [DEMO](https://wanted-challenge-7-blog.vercel.app/)
 
 ### 폴더 구조
 
