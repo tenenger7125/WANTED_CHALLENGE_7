@@ -1,8 +1,6 @@
 import { createGlobalStyle } from "styled-components";
-import base from "./base";
-import normalize from "./normalize";
 
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
 
   body {
     max-width: 1410px;
@@ -15,3 +13,5 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 `;
+
+export default GlobalStyle;

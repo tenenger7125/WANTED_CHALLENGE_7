@@ -46,6 +46,8 @@ const colors = {
   },
 };
 
-export const defaultTheme: DefaultTheme = {
+const defaultTheme: DefaultTheme = {
   colors,
 };
+
+export default defaultTheme;
