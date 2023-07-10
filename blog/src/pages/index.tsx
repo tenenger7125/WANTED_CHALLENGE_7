@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { styled } from "styled-components";
+import type { GetStaticProps } from "next";
 
 import { mark } from "@/utils/mark";
 import { files } from "@/utils/files";
@@ -9,26 +10,17 @@ import { PATH } from "@/constants/path";
 import Title from "@/components/Title";
 import Text from "@/components/Text";
 import { SSrOnly, SBadge } from "@/styles/common";
+import type { PostProps } from "./posts/[postId]";
+import { Reset } from "styled-reset";
 
 type HomeProps = {
-  posts: {
-    metaData: {
-      title: string;
-      date: string;
-      description: string;
-      slug: string;
-      categories: string[];
-      tags: string[];
-      imgURL: string;
-      // [index: string]: string | string[] | undefined;
-    };
-    markup: { __html: string };
-  }[];
+  posts: PostProps[];
 };
 
 const Home = ({ posts }: HomeProps) => {
   return (
     <>
+      {/* <Reset /> */}
       <Head>
         <title>마크다운 블로그</title>
         <meta name="description" content="마크다운 파일을 HTML로 변환하고 JSX로 반환하여 화면에 렌더링합니다." />
@@ -48,16 +40,16 @@ const Home = ({ posts }: HomeProps) => {
                 <Text fz={12}>{date}</Text>
                 <SCategories>
                   {categories.map((category) => (
-                    <Text as="li" fz={12} key={category}>
+                    <Text fz={12} key={category}>
                       {category}
                     </Text>
                   ))}
                 </SCategories>
-                <ul>
+                <div>
                   {tags.map((tag) => (
                     <SBadge key={tag}>{tag}</SBadge>
                   ))}
-                </ul>
+                </div>
               </SInfoContainer>
               <SSrOnly>{slug}</SSrOnly>
             </Link>
@@ -68,7 +60,7 @@ const Home = ({ posts }: HomeProps) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const contents = files.get();
   const posts = await mark.read(contents);
 
@@ -104,7 +96,7 @@ const SInfoContainer = styled.div`
   padding: 1rem;
 `;
 
-const SCategories = styled.ul`
+const SCategories = styled.div`
   display: flex;
   gap: 5px;
   font-weight: 700;
