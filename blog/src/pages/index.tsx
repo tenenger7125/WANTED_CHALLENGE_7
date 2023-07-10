@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 import type { GetStaticProps } from "next";
 
 import { Title, Text, Meta, Badge } from "@/components";
-import { mark, files } from "@/utils";
+import { markdown, files } from "@/utils";
 import { PATH } from "@/constants/path";
 import { SSrOnly } from "@/styles/common";
 import type { PostProps } from "./posts/[postId]";
@@ -47,8 +47,8 @@ const Home = ({ posts }: HomeProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const contents = files.get() as string[]; // ❗ 타입 단언 쓰기 싫다.
-  const posts = await mark.parser(contents);
+  const contents = files.get() as string[]; // ❗ 타입 단언
+  const posts = await markdown.parser(contents);
 
   return {
     props: {

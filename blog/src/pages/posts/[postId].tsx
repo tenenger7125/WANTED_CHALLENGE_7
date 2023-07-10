@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import type { GetStaticPaths, GetStaticProps } from "next";
 
 import { Meta } from "@/components";
-import { files, mark } from "@/utils";
+import { files, markdown } from "@/utils";
 
 const Post = ({ metaData, markup }: PostProps) => {
   return (
@@ -31,10 +31,10 @@ export const getStaticPaths: GetStaticPaths = () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
 
-  if (!params || typeof params.postId !== "string") return { props: {} }; // ❗ 좀...
+  if (!params || typeof params.postId !== "string") return { props: {} }; // ❗ 더 잘 할 수 있지 않을까?
 
-  const content = files.get(+params.postId) as string; // ❗ 하아.... 타입 단언 쓰기 싫다..
-  const { metaData, markup } = await mark.parse(content);
+  const content = files.get(+params.postId) as string; // ❗ 타입 단언
+  const { metaData, markup } = await markdown.parse(content);
 
   return {
     props: {

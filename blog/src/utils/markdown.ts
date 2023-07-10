@@ -9,7 +9,7 @@ const defaultMetaData = {
 const markdown = {
   async parse(content: string) {
     const { content: markdown, data: metaData } = matter(content);
-    const { value } = await remark().use(html).process(markdown);
+    const { value } = await remark().use(html).process(markdown); // ❗ 타입 에러
 
     return {
       metaData: { ...defaultMetaData, ...metaData },
