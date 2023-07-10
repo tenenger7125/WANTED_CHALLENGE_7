@@ -3,12 +3,16 @@ import { remark } from "remark";
 import html from "remark-html";
 import { Plugin } from "unified";
 import { Root } from "mdast";
+import hljs from "highlight.js";
 
 const defaultMetaData = {
   imgURL: "https://via.placeholder.com/320x150",
 };
 
 const markdown = {
+  highlight(code: string) {
+    return hljs.highlightAuto(code).value;
+  },
   async parse(content: string) {
     const { content: markdown, data: metaData } = matter(content);
     const { value } = await remark()
