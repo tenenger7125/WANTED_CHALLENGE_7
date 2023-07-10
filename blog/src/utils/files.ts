@@ -5,6 +5,9 @@ const root = process.env.PWD ?? "";
 const markdownFolderPath = path.join(root, "/__posts");
 
 export const files = {
+  count() {
+    return fs.readdirSync(markdownFolderPath).length;
+  },
   get(idx?: number) {
     const fileNames = fs.readdirSync(markdownFolderPath);
 
