@@ -1,8 +1,8 @@
 import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+import base from "./base";
+import normalize from "./normalize";
 
 export const GlobalStyle = createGlobalStyle`
-  ${reset}
 
   body {
     max-width: 1410px;
