@@ -3,8 +3,14 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 
 import { Meta } from "@/components";
 import { files, markdown } from "@/utils";
+import { useEffect } from "react";
+import hljs from "highlight.js";
 
 const Post = ({ metaData, markup }: PostProps) => {
+  useEffect(() => {
+    hljs.highlightAll();
+  }, []);
+
   return (
     <>
       <Meta meta={metaData} />
