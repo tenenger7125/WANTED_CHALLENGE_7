@@ -81,6 +81,7 @@ export const getStaticProps = async () => {
 
 const SLayout = styled.main`
   display: flex;
+  flex-flow: row wrap;
 `;
 
 const SArticle = styled.article`

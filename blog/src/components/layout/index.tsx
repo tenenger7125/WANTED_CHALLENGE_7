@@ -1,4 +1,4 @@
-import NavigationBar from "./NavigationBar";
+import Header from "./Header";
 import Footer from "./Footer";
 
 type LayoutProps = {
@@ -8,7 +8,7 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <NavigationBar />
+      <Header />
       {children}
       <Footer />
     </>
