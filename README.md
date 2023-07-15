@@ -9,3 +9,5 @@
 [2. Redux 레포지토리에서 코드 분석하고 직접 scratch 작성](https://github.com/tenenger7125/WANTED_CHALLENGE_7/tree/main/redux)
 
 [3. Next.js로 마크다운 블로그 만들기](https://github.com/tenenger7125/WANTED_CHALLENGE_7/tree/main/blog)
+
+[4. Next.js로 만들어진 마크다운 블로그를 Next.js 13버전인 App Router으로 마이그레이션하기](https://github.com/tenenger7125/WANTED_CHALLENGE_7/tree/main/blog-next13)
